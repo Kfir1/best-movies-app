@@ -9,7 +9,7 @@ import YouTube from 'react-youtube';
         super(props);
        
         this.state={
-            currentMovie:{},
+            currentMovie:null,
             isLoading:true
 
         }
@@ -31,6 +31,9 @@ import YouTube from 'react-youtube';
    
     
     render() {
+        if( ! currentMovie) {
+            return <div>Loading...</div>
+        }
         return (
                 <div className="detailsPage">
                     <div className="tagLine"> 
