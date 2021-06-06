@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import {  Tabs,Tab, Container, Row, Col, Image, Card } from 'react-bootstrap'
 import { withRouter } from 'react-router';
 import { TMDBDetails, TMDBDiscover,} from '../utils';
-import YouTube from 'react-youtube';
+import YouTube from 'react-youtube'; 
 
  class DetailesPage extends React.Component {
     constructor(props){
         super(props);
        
         this.state={
-            currentMovie:null,
-            isLoading:true
-
+            currentMovie:{},
+            isLoading:true,
+            movieId:0
         }
    
     }
@@ -23,17 +23,28 @@ import YouTube from 'react-youtube';
  
         TMDBDetails(currentMovieID).then((res) =>{
           
-                     this.setState({currentMovie:res})
+                     this.setState({currentMovie:res, movieId:currentMovieID})
                  }
    
           )
+        
      }
-   
+ componentDidUpdate(){
+    if(  this.props.match.params.movieId != this.state.movieId ){
+        let newMovie = this.props.match.params.movieId;
+        TMDBDetails(newMovie).then((res) =>{
+          
+            this.setState({currentMovie:res, movieId:newMovie})
+        }
+
+ )
+    }
+   }
     
     render() {
-        if( ! currentMovie) {
-            return <div>Loading...</div>
-        }
+        // if( ! currentMovie) {
+        //     return <div>Loading...</div>
+        // }
         return (
                 <div className="detailsPage">
                     <div className="tagLine"> 

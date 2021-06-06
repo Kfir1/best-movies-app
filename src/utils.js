@@ -92,7 +92,7 @@ export  const  TMDBDetails = async (id)=>{
     const rating= omdbDetails.Ratings ? omdbDetails.Ratings.map((rating)=>{
         return <>{ rating.Source} {rating.Value}</>
     }) : null;
-
+    console.log(tmdbvideo);
     return { 
                title:tmdbDetails.original_title,
                 year: omdbDetails.Year,
